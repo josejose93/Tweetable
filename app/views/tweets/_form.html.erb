@@ -1,0 +1,21 @@
+<% user = tweet.user %>
+<%= form_with(model: tweet) do |form| %>
+  <article class="tweet">
+    <div class="tweet__image-content">
+      <% if user.avatar.attached? %>
+        <%= image_tag avatar, class: "tweet__image" %>
+      <% else %>
+        <%= image_tag "icons/user.svg", class: "tweet__image" %>
+      <% end %>
+    </div>
+    <div class="tweet__content">
+      <div class="tweet__area">
+        <%= form.text_area :body, placeholder: "Remember to thing before write...", class: "tweet__area" %>
+      </div>
+      <%=errors_for(tweet, :body)%>
+      <div class="tweet__submit">
+        <%= form.submit "Tweet", class: "button button--primary button--sm"%>
+      </div>
+    </div>
+  </article>
+<% end %>

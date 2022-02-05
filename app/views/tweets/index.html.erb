@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="tweet-header mb-1"><h1 class="heading--lg">Home</h1></div>
+<%if user_signed_in?%>
+  <%= render "form", tweet: @tweet %>
+<%end%>
+<div class="mb-4" id="tweets">
+  <% @tweets.each do |tweet| %>
+    <%= render tweet %>
+  <% end %>
+</div>

@@ -1,0 +1,43 @@
+<% user = tweet.user %>
+<div id="<%= dom_id tweet %>">
+  <article class="tweet">
+    <div class="tweet__image-content">
+      <% if user.avatar.attached? %>
+        <%= image_tag avatar, class: "tweet__image" %>
+      <% else %>
+        <%= image_tag "icons/user.svg", class: "tweet__image" %>
+      <% end %>
+    </div>
+    <div class="tweet__content">
+      <div class="tweet__header">
+        <div class="tweet__data">
+          <%= content_tag :span, capitalize_first_letter(user.name), class: "heading--r" %>
+          <span class="tweet__date content-r"><%= "@#{user.username}" %></span>
+          <span class="tweet__date content-sm">
+            <%= "updated" if tweet.created_at != tweet.updated_at %>
+            <%= time_ago_in_words(tweet.updated_at) %> ago
+          </span>
+        </div>
+      </div>
+      <p class="content-r">
+        <%= tweet.body %>
+      </p>
+      <div class="tweet__footer">
+        <div class="tweet__footer-comments">
+          <%= image_tag "icons/replies.svg" %>
+          <%= content_tag :span, tweet.comments_count, class: "content-sm" %>
+        </div>
+        <% if user == current_user %>
+          <div class="tweet__footer-comments">
+            <%=link_to image_tag("icons/edit.svg"), 
+                        edit_tweet_path(tweet)%>
+            <%=button_to image_tag("icons/trash.svg"), 
+                          tweet, 
+                          method: :delete, "data-turbo": "false",
+                          class: "action-icon"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </article>
+</div>
