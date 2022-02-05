@@ -15,7 +15,7 @@
           <span class="tweet__date content-r"><%= "@#{user.username}" %></span>
           <span class="tweet__date content-sm">
             <%= "updated" if tweet.created_at != tweet.updated_at %>
-            <%= time_ago_in_words(tweet.updated_at) %> ago
+            <%= distance_of_time_in_words_to_now(tweet.updated_at) %>
           </span>
         </div>
       </div>

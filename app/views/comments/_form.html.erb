@@ -1,32 +1,21 @@
-<%= form_with(model: comment) do |form| %>
-  <% if comment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
-        <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<% user = @tweet.user %>
+<%= form_with(model: [@tweet, @tweet.comments.build]) do |form| %>
+  <article class="comment mb-4">
+    <div class="comment__image-content">
+      <% if @tweet.user.avatar.attached? %>
+        <%= image_tag avatar, class: "comment__image" %>
+      <% else %>
+        <%= image_tag "icons/user.svg", class: "comment__image" %>
+      <% end %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :tweet_id, style: "display: block" %>
-    <%= form.text_field :tweet_id %>
-  </div>
-
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+    <div class="comment__content">
+      <div class="comment__area">
+        <%= form.text_area :body, placeholder: "Remember to thing before write...", class: "comment__area" %>
+      </div>
+      <%=errors_for(@tweet, :body)%>
+      <div class="comment__submit">
+        <%= form.submit "comment", class: "button button--primary button--sm"%>
+      </div>
+    </div>
+  </article>
 <% end %>

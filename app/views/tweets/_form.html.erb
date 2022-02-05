@@ -1,6 +1,6 @@
 <% user = tweet.user %>
 <%= form_with(model: tweet) do |form| %>
-  <article class="tweet">
+  <article class="tweet mb-4">
     <div class="tweet__image-content">
       <% if user.avatar.attached? %>
         <%= image_tag avatar, class: "tweet__image" %>

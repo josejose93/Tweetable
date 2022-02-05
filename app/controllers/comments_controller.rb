@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
 
   # GET /comments
   def index
-    @comments = Comment.all
+    @comments = Comment.where(tweet_id: params[:tweet_id])
+    @comment = @tweet.comments.new
   end
 
   # GET /comments/1
@@ -12,7 +13,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @tweet = Tweet.find(params[:tweet_id])
+    @comment = @tweet.comments.new
   end
 
   # GET /comments/1/edit
@@ -21,7 +23,9 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-    @comment = Comment.new(comment_params)
+    @tweet = Tweet.find(params[:tweet_id])
+    @comment = @tweet.comments.new(comment_params)
+    # @comment.user = @tweet.user
 
     if @comment.save
       redirect_to @comment, notice: "Comment was successfully created."
@@ -53,6 +57,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:user_id, :tweet_id, :body)
+      params.require(:comment).permit(:body)
     end
 end
