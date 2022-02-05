@@ -1,11 +1,39 @@
-<% user = comment.user %>
+<% user = @tweet.user %>
 <div id="<%= dom_id comment %>">
-  <p>
-    <%= "#{capitalize_first_letter(user.name)} @#{user.username} #{time_ago_in_words(comment.updated_at)}" %>
-  </p>
-
-  <p>
-    <strong>Body:</strong>
-    <%= comment.body %>
-  </p>
+  <article class="comment">
+    <div class="comment__image-content">
+      <% if user.avatar.attached? %>
+        <%= image_tag avatar, class: "comment__image" %>
+      <% else %>
+        <%= image_tag "icons/user.svg", class: "comment__image" %>
+      <% end %>
+    </div>
+    <div class="comment__content">
+      <div class="comment__header">
+        <div class="comment__data">
+          <%= content_tag :span, capitalize_first_letter(user.name), class: "heading--r" %>
+          <span class="comment__date content-r"><%= "@#{user.username}" %></span>
+          <span class="comment__date content-sm">
+            <%= "updated" if comment.created_at != comment.updated_at %>
+            <%= distance_of_time_in_words_to_now(comment.updated_at) %>
+          </span>
+        </div>
+      </div>
+      <p class="content-r">
+        <%= comment.body %>
+      </p>
+      <div class="comment__footer">
+        <% if user == current_user %>
+          <div class="comment__footer-comments">
+            <%=link_to image_tag("icons/edit.svg"), 
+                        edit_comment_path(comment)%>
+            <%=button_to image_tag("icons/trash.svg"), 
+                          comment, 
+                          method: :delete, "data-turbo": "false",
+                          class: "action-icon"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </article>
 </div>

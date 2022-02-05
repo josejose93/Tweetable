@@ -14,8 +14,8 @@
     <header class="header">
       <div class="container navbar">
         <%if user_signed_in?%>
-          <%=link_to "Profile", "#", class: "content-r"%>
-          <%=button_to "Log Out", destroy_user_session_path, method: :delete, data: { turbo: "false" }, class: "button button--sm button--ghost"%>
+          <%=link_to "Edit Profile", "#", class: "content-r"%>
+          <%=button_to "Log Out", destroy_user_session_path, method: :delete, data: { turbo: "false" }, class: "button button--r button--ghost"%>
         <%else%>
           <%=link_to "Sign in", new_user_session_path%>
         <%end%>
