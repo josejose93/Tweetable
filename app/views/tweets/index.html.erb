@@ -1,14 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Tweets</h1>
-
-<div id="tweets">
+<div class="tweet-header mb-1"><h1 class="heading--lg">Home</h1></div>
+<%if user_signed_in?%>
+  <%= render "form", tweet: @tweet %>
+<%end%>
+<div class="mb-4" id="tweets">
   <% @tweets.each do |tweet| %>
     <%= render tweet %>
-    <p>
-      <%= link_to "Show this tweet", tweet %>
-    </p>
   <% end %>
 </div>
-
-<%= link_to "New tweet", new_tweet_path %>

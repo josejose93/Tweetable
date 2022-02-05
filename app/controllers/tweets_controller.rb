@@ -1,9 +1,12 @@
 class TweetsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_tweet, only: %i[ show edit update destroy ]
 
   # GET /tweets
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.order(updated_at: :desc)
+    @tweet = Tweet.new
+    @tweet.user = current_user
   end
 
   # GET /tweets/1
@@ -22,6 +25,7 @@ class TweetsController < ApplicationController
   # POST /tweets
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.user = current_user
 
     if @tweet.save
       redirect_to @tweet, notice: "Tweet was successfully created."
@@ -44,7 +48,7 @@ class TweetsController < ApplicationController
     @tweet.destroy
     redirect_to tweets_url, notice: "Tweet was successfully destroyed."
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
@@ -53,6 +57,7 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:body, :comments_count)
+      params.require(:tweet).permit(:body)
     end
+
 end

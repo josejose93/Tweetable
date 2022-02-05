@@ -1,0 +1,86 @@
+.section-xs {
+  padding: 8px;
+}
+
+.section {
+  margin: 1rem;
+}
+
+.section-sm {
+  padding: 32px;
+}
+
+.container-xs {
+  width: 42px;
+  height: 32px;
+  border-radius: 0.25em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-cover {
+  max-width: 120px;
+  height: auto;
+}
+
+.container-company {
+  max-width: 192px;
+}
+
+.container-actions {
+  max-width: 192px;
+  height: 16px;
+}
+
+.navbar {
+  height: 40px;
+  gap: 16px;
+}
+
+.container-navbar {
+  width: 100%;
+  height: 40px;
+}
+
+.container-content {
+  width: 208px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container-sm {
+  max-width: 328px;
+  height: 32px;
+}
+
+.container-mm {
+  max-width: 328px;
+  height: 48px;
+}
+
+.container-m {
+  max-width: 328px;
+  height: fit-content;
+}
+
+.container-xm {
+  max-width: 328px;
+  height: 224px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.container-lg {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.container-xl {
+  max-width: 1280px;
+  margin: auto;
+}

@@ -1,27 +1,21 @@
+<% user = tweet.user %>
 <%= form_with(model: tweet) do |form| %>
-  <% if tweet.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
-
-      <ul>
-        <% tweet.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <article class="tweet">
+    <div class="tweet__image-content">
+      <% if user.avatar.attached? %>
+        <%= image_tag avatar, class: "tweet__image" %>
+      <% else %>
+        <%= image_tag "icons/user.svg", class: "tweet__image" %>
+      <% end %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div>
-    <%= form.label :comments_count, style: "display: block" %>
-    <%= form.number_field :comments_count %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+    <div class="tweet__content">
+      <div class="tweet__area">
+        <%= form.text_area :body, placeholder: "Remember to thing before write...", class: "tweet__area" %>
+      </div>
+      <%=errors_for(tweet, :body)%>
+      <div class="tweet__submit">
+        <%= form.submit "Tweet", class: "button button--primary button--sm"%>
+      </div>
+    </div>
+  </article>
 <% end %>
