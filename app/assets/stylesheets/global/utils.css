@@ -32,6 +32,14 @@
   color: var(--primary-500);
 }
 
+.primary-text {
+  color: var(--primary-text);
+}
+
+.secondary-text {
+  color: var(--secondary-text);
+}
+
 .gray-200 {
   color: var(--gray-200);
 }

@@ -25,7 +25,7 @@
       <div class="tweet__footer">
         <div class="tweet__footer-comments">
           <%= image_tag "icons/replies.svg" %>
-          <%= content_tag :span, tweet.comments_count, class: "content-sm" %>
+          <%= link_to tweet.comments_count, tweet, class: "content-sm secondary-text" %>
         </div>
         <% if user == current_user %>
           <div class="tweet__footer-comments">
