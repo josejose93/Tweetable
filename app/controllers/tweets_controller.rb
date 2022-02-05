@@ -11,7 +11,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1
   def show
-    # @comment = Comment.new
+    @comment = Comment.new
   end
 
   # GET /tweets/new

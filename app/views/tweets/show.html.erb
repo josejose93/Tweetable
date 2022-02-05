@@ -4,4 +4,10 @@
   <%= render @tweet %>
 </div>
 
-<%= render @tweet.comments %>
+<%if user_signed_in?%>
+  <%= render 'comments/form' %>
+<%end%>
+
+<% @tweet = Tweet.find(params[:id]) %>
+
+<%= render @tweet.comments.order(updated_at: :desc) %>

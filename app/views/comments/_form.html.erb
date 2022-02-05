@@ -1,8 +1,9 @@
 <% user = @tweet.user %>
-<%= form_with(model: [@tweet, @tweet.comments.build]) do |form| %>
+
+<%= form_with model: [ @tweet, @tweet.comments.build ] do |form| %>
   <article class="comment mb-4">
     <div class="comment__image-content">
-      <% if @tweet.user.avatar.attached? %>
+      <% if user.avatar.attached? %>
         <%= image_tag avatar, class: "comment__image" %>
       <% else %>
         <%= image_tag "icons/user.svg", class: "comment__image" %>
@@ -12,7 +13,7 @@
       <div class="comment__area">
         <%= form.text_area :body, placeholder: "Remember to thing before write...", class: "comment__area" %>
       </div>
-      <%=errors_for(@tweet, :body)%>
+
       <div class="comment__submit">
         <%= form.submit "comment", class: "button button--primary button--sm"%>
       </div>
