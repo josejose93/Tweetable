@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   # GET /comments
   def index
-    @comments = Comment.where(tweet_id: params[:tweet_id])
+    @comments = Comment.where(tweet_id: params[:tweet_id]).order(updated_at: :desc)
     @comment = @tweet.comments.new
   end
 
@@ -19,18 +19,21 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @tweet = Tweet.find(params[:tweet_id])
+    # @comment = @tweet.comments.new
   end
 
   # POST /comments
   def create
     @tweet = Tweet.find(params[:tweet_id])
     @comment = @tweet.comments.new(comment_params)
-    # @comment.user = @tweet.user
+    user = current_user
+    @comment.user = user
 
     if @comment.save
-      redirect_to @comment, notice: "Comment was successfully created."
+      redirect_to @tweet, notice: "Comment was successfully created."
     else
-      render :new, status: :unprocessable_entity
+      render @tweet, status: :unprocessable_entity
     end
   end
 

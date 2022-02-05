@@ -1,4 +1,5 @@
 <% user = @tweet.user %>
+
 <div id="<%= dom_id comment %>">
   <article class="comment">
     <div class="comment__image-content">
@@ -11,8 +12,8 @@
     <div class="comment__content">
       <div class="comment__header">
         <div class="comment__data">
-          <%= content_tag :span, capitalize_first_letter(user.name), class: "heading--r" %>
-          <span class="comment__date content-r"><%= "@#{user.username}" %></span>
+          <%= content_tag :span, capitalize_first_letter(comment.user.name), class: "heading--r" %>
+          <span class="comment__date content-r"><%= "@#{comment.user.username}" %></span>
           <span class="comment__date content-sm">
             <%= "updated" if comment.created_at != comment.updated_at %>
             <%= distance_of_time_in_words_to_now(comment.updated_at) %>
@@ -23,12 +24,12 @@
         <%= comment.body %>
       </p>
       <div class="comment__footer">
-        <% if user == current_user %>
+        <% if comment.user == current_user %>
           <div class="comment__footer-comments">
             <%=link_to image_tag("icons/edit.svg"), 
-                        edit_comment_path(comment)%>
+                        edit_tweet_comment_path(comment)%>
             <%=button_to image_tag("icons/trash.svg"), 
-                          comment, 
+                          "tweet_comment_path", 
                           method: :delete, "data-turbo": "false",
                           class: "action-icon"%>
           </div>
